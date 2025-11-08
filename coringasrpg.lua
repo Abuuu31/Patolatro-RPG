@@ -248,6 +248,69 @@ SMODS.Joker{
         end
     end
 }
+-- Oleg
+SMODS.Joker{
+    key = 'oleg',
+
+    loc_txt = {
+        name = 'Oleg',
+        text = {
+           "Este round oleg snipará a carta: {C:attention}#2#",
+                    "of {V:1}#3#{} e ela vai dar ",
+                    "{X:blue,C:white} X#1# {} fichas quando pontuar ",
+                    "{s:0.8}A carta snipada muda todo round",
+        }
+    },
+    atlas = 'Jokers',
+    rarity = 2,
+    cost = 6,
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
+    pos = {x = 2, y = 0},
+    config = { extra = { xchips = 2 } },
+    loc_vars = function(self, info_queue, card)
+        local idol_card = G.GAME.current_round.idol_card or { rank = 'Ace', suit = 'Spades' }
+        return { vars = { card.ability.extra.xchips, localize(idol_card.rank, 'ranks'), localize(idol_card.suit, 'suits_plural'), colours = { G.C.SUITS[idol_card.suit] } } }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and
+            context.other_card:get_id() == G.GAME.current_round.idol_card.id and
+            context.other_card:is_suit(G.GAME.current_round.idol_card.suit) then
+            return {
+                xchips = card.ability.extra.xchips
+            }
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return { vars = { number_format(1000000) } }
+    end,
+    check_for_unlock = function(self, args)                        -- equivalent to `unlock_condition = { type = 'chip_score', chips = 1000000 }`
+        return args.type == 'chip_score' and args.chips >= 1000000 -- See note about Talisman on the wiki
+    end
+}
+
+--- This changes vremade_idol_card every round so every instance of The Idol shares the same card.
+--- You could replace this with a context.end_of_round reset instead if you want the variables to be local.
+--- See SMODS.current_mod.reset_game_globals at the bottom of this file for when this function is called.
+local function reset_vremade_idol_card()
+    G.GAME.current_round.idol_card = { rank = 'Ace', suit = 'Spades' }
+    local valid_idol_cards = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_suit(playing_card) and not SMODS.has_no_rank(playing_card) then
+            valid_idol_cards[#valid_idol_cards + 1] = playing_card
+        end
+    end
+    local idol_card = pseudorandom_element(valid_idol_cards, 'vremade_idol' .. G.GAME.round_resets.ante)
+    if idol_card then
+        G.GAME.current_round.idol_card.rank = idol_card.base.value
+        G.GAME.current_round.idol_card.suit = idol_card.base.suit
+        G.GAME.current_round.idol_card.id = idol_card.base.id
+    end
+end
+
 ----------------------------------------------
 ------------MOD CODE END----------------------
     
