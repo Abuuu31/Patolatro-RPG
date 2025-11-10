@@ -1,10 +1,3 @@
---- STEAMODDED HEADER
---- MOD_NAME:  Patolatro RPG
---- MOD_ID: PatolatroRPG
---- MOD_AUTHOR: [Abuu]
---- MOD_DESCRIPTION: Personagens dos nossos RPGs transformados em Balatro
---- PREFIX: rpgs
-----------------------------------------------
 ------------MOD CODE -------------------------
 
 if SMODS.Atlas then

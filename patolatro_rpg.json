@@ -1,0 +1,19 @@
+{
+	"id": "PatolatroRPG",
+	"name": "Patolatro RPG",
+	"display_name": "Patolatro RPG",
+	"author": ["Abuu"],
+	"description": "Personagens dos nossos RPGs transformados em Balatro",
+	"prefix": "rpgs",
+	"main_file": "coringasrpg.lua",
+	"priority": 0,
+	"badge_colour": "228B22",
+	"badge_text_colour": "FFFFFF",
+	"version": "1.0.1",
+	"dependencies": [
+        "Steamodded (>=1.*)",
+		"Lovely (>=0.6)"
+    ]
+}
+
+
