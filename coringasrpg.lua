@@ -1,5 +1,8 @@
 ------------MOD CODE -------------------------
 
+-------------------------------------- ATLAS --------------------------------------
+
+--------- ICONE DO MOD ---------
 if SMODS.Atlas then
   SMODS.Atlas({
     key = "modicon",
@@ -9,7 +12,7 @@ if SMODS.Atlas then
   })
 end
 
-
+--------- ATLAS PARA OS ENHANCEMENTS (APRIMORAMENTOS DE CARTAS) ---------
 SMODS.Atlas{
     key = 'enhancements',
     path = 'enhancements.png',
@@ -17,7 +20,18 @@ SMODS.Atlas{
     py = 95
 }
 
--- Carta fã
+------------- ATLAS PARA OS JOKERS -------------
+SMODS.Atlas{
+    key = 'Jokers',
+    path = 'Jokers.png',
+    px = 71,
+    py = 95
+}
+
+-------------------------------------- CARTAS --------------------------------------
+
+------------- OLÍVIA -------------
+---- carta de fã ----
 SMODS.Enhancement{
     key = 'carta_fa',
     atlas = 'enhancements',
@@ -65,15 +79,9 @@ SMODS.Enhancement{
         end
     end,
 }
--- Atlas para Jokers
-SMODS.Atlas{
-    key = 'Jokers',
-    path = 'Jokers.png',
-    px = 71,
-    py = 95
-}
+---- fim carta de fã ----
 
--- Olivia Benedita
+---- olívia benedita ----
   SMODS.Joker{
     key = 'olivia',
 
@@ -188,7 +196,9 @@ SMODS.Rarity{
         return 0  -- Peso 0 = nunca aparece aleatoriamente
     end
 }
---Olivia Benedita Final Boss
+---- fim de olívia benedita ----
+
+---- olívia benedita final boss ----
 SMODS.Joker{
     key = 'olivia_final',
 
@@ -251,7 +261,11 @@ SMODS.Joker{
         end
     end
 }
--- Oleg
+---- fim de olívia benedita final boss ----
+------------- FIM DA CLASSE OLÍVIA -------------
+
+
+------------- OLEG -------------
 SMODS.Joker{
     key = 'oleg',
 
@@ -294,26 +308,9 @@ SMODS.Joker{
         return args.type == 'chip_score' and args.chips >= 1000000 -- See note about Talisman on the wiki
     end
 }
+------------- FIM DA CLASSE OLEG -------------
 
---- This changes vremade_idol_card every round so every instance of The Idol shares the same card.
---- You could replace this with a context.end_of_round reset instead if you want the variables to be local.
---- See SMODS.current_mod.reset_game_globals at the bottom of this file for when this function is called.
-local function reset_vremade_idol_card()
-    G.GAME.current_round.idol_card = { rank = 'Ace', suit = 'Spades' }
-    local valid_idol_cards = {}
-    for _, playing_card in ipairs(G.playing_cards) do
-        if not SMODS.has_no_suit(playing_card) and not SMODS.has_no_rank(playing_card) then
-            valid_idol_cards[#valid_idol_cards + 1] = playing_card
-        end
-    end
-    local idol_card = pseudorandom_element(valid_idol_cards, 'vremade_idol' .. G.GAME.round_resets.ante)
-    if idol_card then
-        G.GAME.current_round.idol_card.rank = idol_card.base.value
-        G.GAME.current_round.idol_card.suit = idol_card.base.suit
-        G.GAME.current_round.idol_card.id = idol_card.base.id
-    end
-end
--- Bruce
+------------- BRUCE -------------
 SMODS.Joker{
     key = 'bussy',
 
@@ -333,8 +330,10 @@ SMODS.Joker{
     perishable_compat = false,
     pos = {x = 3, y = 0},
 }
--- Kimiko
-  SMODS.Joker{
+------------- FIM DA CLASSE BRUCE -------------
+
+------------- KIMIKO -------------
+SMODS.Joker{
     key = 'kimiko',
 
     loc_txt = {
@@ -353,8 +352,10 @@ SMODS.Joker{
     perishable_compat = false,
     pos = {x = 4, y = 0},
 }
--- Kai
-  SMODS.Joker{
+------------- FIM DA CLASSE KIMIKO -------------
+
+------------- KAI (MEU FILHO) -------------
+SMODS.Joker{
     key = 'kai',
 
     loc_txt = {
@@ -373,8 +374,10 @@ SMODS.Joker{
     perishable_compat = false,
     pos = {x = 5, y = 0},
 }
--- V
-  SMODS.Joker{
+------------- FIM DA CLASSE KAI -------------
+
+------------- V -------------
+SMODS.Joker{
     key = 'V',
 
     loc_txt = {
@@ -393,8 +396,10 @@ SMODS.Joker{
     perishable_compat = false,
     pos = {x = 6, y = 0},
 }
--- Dominique
-  SMODS.Joker{
+------------- FIM DA CLASSE V -------------
+
+------------- DOMINIQUE -------------
+SMODS.Joker{
     key = 'Dominique',
 
     loc_txt = {
@@ -413,27 +418,29 @@ SMODS.Joker{
     perishable_compat = false,
     pos = {x = 7, y = 0},
 }
--- Nano
-    SMODS.Joker{
-        key = 'Nano',
+------------- FIM DA CLASSE DOMINIQUE -------------
+
+------------- NANO -------------
+SMODS.Joker{
+    key = 'Nano',
     
-        loc_txt = {
-            name = 'Nano',
-            text = {
-                ''
+    loc_txt = {
+        name = 'Nano',
+        text = {
+            ''
             }
         },
-        atlas = 'Jokers',
-        rarity = 3,
-        cost = 6,
-        unlocked = true,
-        discovered = true,
-        blueprint_compat = false,
-        eternal_compat = false,
-        perishable_compat = false,
-        pos = {x = 8, y = 0},
-    }
-
+    atlas = 'Jokers',
+    rarity = 3,
+    cost = 6,
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
+    pos = {x = 8, y = 0},
+}
+------------- FIM DA CLASSE NANO -------------
 
 
 ----------------------------------------------

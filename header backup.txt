@@ -4,3 +4,26 @@
 --- MOD_AUTHOR: [Abuu]
 --- MOD_DESCRIPTION: Personagens dos nossos RPGs transformados em Balatro
 --- PREFIX: rpgs
+
+
+
+
+#backup da função do oleg (????)
+--- This changes vremade_idol_card every round so every instance of The Idol shares the same card.
+--- You could replace this with a context.end_of_round reset instead if you want the variables to be local.
+--- See SMODS.current_mod.reset_game_globals at the bottom of this file for when this function is called.
+local function reset_vremade_idol_card()
+    G.GAME.current_round.idol_card = { rank = 'Ace', suit = 'Spades' }
+    local valid_idol_cards = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_suit(playing_card) and not SMODS.has_no_rank(playing_card) then
+            valid_idol_cards[#valid_idol_cards + 1] = playing_card
+        end
+    end
+    local idol_card = pseudorandom_element(valid_idol_cards, 'vremade_idol' .. G.GAME.round_resets.ante)
+    if idol_card then
+        G.GAME.current_round.idol_card.rank = idol_card.base.value
+        G.GAME.current_round.idol_card.suit = idol_card.base.suit
+        G.GAME.current_round.idol_card.id = idol_card.base.id
+    end
+end
