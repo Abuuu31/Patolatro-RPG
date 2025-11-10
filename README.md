@@ -6,9 +6,9 @@
   <h2>Features</h2>
 
   <ul style="list-style-position: inside;">
-    <li>2 coringas</li>
-    <li>1 Evolução de coringa</li>
-    <li>1 aprimoramento de carta</li>
+    <p>2 coringas</p>
+    <p>1 Evolução de coringa</p>
+    <p>1 aprimoramento de carta</p>
   </ul>
 
   <h2>Contribuição</h2>
