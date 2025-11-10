@@ -4,7 +4,8 @@ Um mod feito para incluir personagens e referências das mesas de RPG que os cri
 
 ## Features
 
-- 1 coringa e sua evolução (olivia benedita)
+- 2 coringas
+- 1 Evolução de coringa
 - 1 aprimoramento de carta
 
 ## Contribuição
@@ -23,4 +24,5 @@ Todos os pull requests e forks são bem vindos
 <a href="https://github.com/ABMS-NS">
   <img src="https://github.com/ABMS-NS.png" width="50" height="50" alt="Alison"/>
 </a>Alison
+
 
